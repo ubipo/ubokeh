@@ -1,0 +1,8 @@
+{
+    "name": "Ubokeh",
+    "description": "Unnecessary Badly-Documented Overly Complicated Esp Http-Server",
+    "include": "include",
+    "build": {
+        "flags": []
+    }
+}
