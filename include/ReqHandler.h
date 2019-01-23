@@ -2,8 +2,6 @@
 
 #include "./Ubokeh.h"
 
-using namespace Ubokeh;
-
 struct Ubokeh::ReqHandler {
-  virtual ReqRes handleReq(char* body);
+  virtual Ubokeh::ReqRes handleReq(char* body);
 };

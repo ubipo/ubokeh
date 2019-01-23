@@ -3,6 +3,6 @@
 using namespace Ubokeh;
 
 struct Ubokeh::ReqRes {
-    short statusCode;
+    unsigned short statusCode;
     char* responseBody;
 };

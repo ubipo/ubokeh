@@ -9,6 +9,7 @@
 #include "HashMap.h"
 #include "CstrHashMap.h"
 #include "StaticCastHashFunc.h"
+#include <functional>
 
 using byte = unsigned char;
 
@@ -28,18 +29,12 @@ class Ubokeh::UhServer {
    * Instanciates an Ubokeh object
    * with the given port.
    */
-  UhServer(unsigned int port);
+  UhServer(unsigned int port, LogHandler logHandler);
   ~UhServer();
 
-  /**
-   * Sets the request handler for
-   * a bad (malformed) request.
-   * The http body passed to the
-   * handler contains the error
-   * code and message seperated
-   * by a space.
-   */
-  void setBadRequestRes(ReqHandler handler);
+  // void setLogHandler(LogHandler handler);
+
+  void testLog();
 
   /**
    * Sets the request handler for
@@ -49,7 +44,17 @@ class Ubokeh::UhServer {
    * code and message seperated
    * by a space.
    */
-  void setInvalidMethodRes(ReqHandler handler);
+  // void setBadRequestRes(ReqHandler handler);
+
+  /**
+   * Sets the request handler for
+   * a bad (malformed) request.
+   * The http body passed to the
+   * handler contains the error
+   * code and message seperated
+   * by a space.
+   */
+  // void setInvalidMethodRes(ReqHandler handler);
 
   /**
    * Sets the request handler for
@@ -58,7 +63,7 @@ class Ubokeh::UhServer {
    * handler contains the requested
    * path.
    */
-  void setNotFoundRes(ReqHandler handler);
+  // void setNotFoundRes(ReqHandler handler);
   
   // class HandlerSetter;
   // class ReqHandler;
@@ -67,16 +72,18 @@ class Ubokeh::UhServer {
   struct HandlerSetter;
   
   HandlerSetter getHandlerSetter(const char* path);
-
   
-  void getHandler(httpMethods method, char* path, ReqHandler* pReqHandler);
+  // void getHandler(httpMethods method, char* path, ReqHandler* pReqHandler);
 
   private:
+  void log(Levels level, const char* msg);
+  LogHandler logHandler;
   ReqHandler badRequestHandler;
   ReqHandler invalidMethodHandler;
   ReqHandler notFoundHandler;
   bool isBound; 
   unsigned int port;
+  protected:
   PathMap pathMap;
   // std::unique_ptr<WiFiServer> server;
 };

@@ -1,32 +1,39 @@
-#include "HandlerSetter.h"
+// #include "HandlerSetter.h"
 
+// UhServer::HandlerSetter::HandlerSetter(PathMap& pathMap) : pathMap(pathMap) {};
 
-UhServer::HandlerSetter* UhServer::HandlerSetter::operator[](Ubokeh::httpMethods _method) {
-    // Check if not in enum range
-    if (_method < 0 || _method >= Ubokeh::noHttpMethods)
-        return nullptr;
+// UhServer::HandlerSetter& UhServer::HandlerSetter::setPath(UhServer& uhServer, const char* path) {
+//   this->newThis = &uhServer.getHandlerSetter(path);
 
-    // Set method
-    method = _method;
+//   return this.newThis;
+// };
 
-    return this;
-};
+// UhServer::HandlerSetter UhServer::HandlerSetter::operator[](Ubokeh::httpMethods _method) {
+//     // Check if not in enum range
+//     if (_method < 0 || _method >= Ubokeh::noHttpMethods)
+//         return nullptr;
 
-UhServer::HandlerSetter* UhServer::HandlerSetter::operator()(MethodMap& _rMethodMap) {
-    setMethodMap(_rMethodMap);
+//     // Set method
+//     method = _method;
 
-    return this;
-};
+//     return *this;
+// };
 
-UhServer::HandlerSetter* UhServer::HandlerSetter::setMethodMap(MethodMap& _rMethodMap) {
-    pMethodMap = &_rMethodMap;
+// UhServer::HandlerSetter& UhServer::HandlerSetter::operator()(UhServer& uhServer, const char* path) {
+//     newThis = new UhServer::HandlerSetter(uhServer.getHandlerSetter(path));
 
-    return this;
-};
+//     return *newThis;
+// };
 
-UhServer::HandlerSetter* UhServer::HandlerSetter::operator>(ReqHandler& reqHandler) {
-    // Replace or add method's handler
-    pMethodMap->put(method, reqHandler);
+// UhServer::HandlerSetter& UhServer::HandlerSetter::setMethodMap(MethodMap& _rMethodMap) {
+//     UhServer::HandlerSetter newHandlerSetter()
 
-    return this;
-};
+//     return *this;
+// };
+
+// UhServer::HandlerSetter UhServer::HandlerSetter::operator>(int& reqHandler) {
+//     // Replace or add method's handler
+//     // pMethodMap->put(method, reqHandler);
+
+//     return *this;
+// };

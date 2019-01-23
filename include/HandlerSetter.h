@@ -4,42 +4,42 @@
 
 #include "./UhServer.h"
 
-using namespace Ubokeh;
-
 /**
  * A class of HandlerSetters that can be used
  * for setting request handlers for a specific
- * method map and method.
+ * path and method.
  */
 struct UhServer::HandlerSetter {
-  MethodMap* pMethodMap;
-  httpMethods method;
+  PathMap& pathMap;
+  httpMethods* method;
+  UhServer::HandlerSetter* newThis;
 
   public:
   /**
    * Constructs a new HandlerSetter
-   * object with the given method map.
+   * object with the given path map.
+   * Use UhServer.getHandlerSetter()
+   * to construct a usable handlerSetter.
    */
-  HandlerSetter(MethodMap& _rMethodMap);
+  HandlerSetter(PathMap& pathMap);
+
+  UhServer::HandlerSetter& setPath(UhServer& uhServer, const char* path);
 
   /**
-   * Sets the MethodMap in which
-   * handlers will be set.
+   * Sets the path 
    */
-  HandlerSetter* setMethodMap(MethodMap& _rMethodMap);
-
-  HandlerSetter* operator()(MethodMap& _rMethodMap);
+  HandlerSetter& operator()(UhServer& uhServer, const char* path);
 
   /**
    * Sets the http method for which
    * the handler is being set.
    * (defaults to httpMethods::GET)
    */
-  HandlerSetter* operator[](httpMethods _method);
+  HandlerSetter operator[](httpMethods _method);
 
   /**
    * Sets the method handler for the
    * currently selected http method.
    */
-  HandlerSetter* operator>(ReqHandler& reqHandler);
+  HandlerSetter operator>(int& reqHandler);
 };

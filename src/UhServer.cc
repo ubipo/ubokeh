@@ -1,28 +1,36 @@
 
 #include "./Ubokeh.h"
 #include "UhServer.h"
+#include "HandlerSetter.h"
 
 #include <stdexcept>
 
 using byte = unsigned char;
 
-using namespace Ubokeh;
+namespace Ubokeh {
+    UhServer::UhServer(unsigned int port, LogHandler logHandler) : logHandler(logHandler) {
+        this->port = port;
+    };
 
-Ubokeh::UhServer::UhServer(unsigned int port) {
-    this->port = port;
-};
+    UhServer::~UhServer() {
+    };
 
-Ubokeh::UhServer::~UhServer() {
-};
+    void UhServer::testLog() {
+        log(INFO, "AAAAAAAAAH, I'm coming from within");
+    };
+
+    void UhServer::log(Levels level, const char* msg) {
+        logHandler(level, "UBOKEH", msg);
+    };
+
+    UhServer::HandlerSetter UhServer::getHandlerSetter(const char* path) {
+        HandlerSetter handlerSetter(this->pathMap);
+        return handlerSetter;
+    };
+}
 
 // void Ubokeh::UhServer::init() {
 //     // server.reset(new WiFiServer(port));
-// };
-
-// const char* Ubokeh::httpMethodsCString[noHttpMethods] = {"GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"};
-
-// Ubokeh::HandlerSetter::HandlerSetter(MethodMap& _rMethodMap) {
-//     setMethodMap(_rMethodMap);
 // };
 
 // void Ubokeh::getHandler(httpMethods method, char* path, ReqHandler* pReqHandler) {

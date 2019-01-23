@@ -3,6 +3,6 @@
     "description": "Unnecessary Badly-Documented Overly Complicated Esp Http-Server",
     "include": "include",
     "build": {
-        "flags": []
+        "flags": ["-D UBOKEH_ENABLE_SEL"]
     }
 }
